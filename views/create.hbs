@@ -1,0 +1,44 @@
+<h2>Create</h2>
+
+<form action="/create" method="POST">
+<div class="mb-3">
+  <label for="name" class="form-label">Case name</label>
+  <input type="text" class="form-control" name="name">
+</div>
+{{#if fromPortfolio}}
+<p>Exchange:</p>
+<b>{{exchange}}</b><br>
+<input type="hidden"  name="exchname" value="{{exchange}}">
+{{else}}
+<div class="mb-3">
+    <label for="exchselect" class="form-label">Exchange:</label>
+    <select id="exchselect" class="form-select" aria-label="select exchange" name="exchname">
+        <option selected>Choose exchange (or go to Profile to add new exchange)</option>
+        {{#each exchanges}}
+        <option value="{{name}}">{{name}}</option>
+        {{/each}}
+    </select>
+</div>
+{{/if}}
+<div class="mb-3">
+    <label for="strselect" class="form-label">Strategy:</label>
+    <select class="form-select" aria-label="select strategy" name="strname">
+        <option selected>Choose strategy</option>
+        {{#each strategys}}
+        <option value="{{name}}">{{name}}</option>
+        {{/each}}
+    </select>
+</div>
+{{#each coins}}
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="coins[]" value="{{name}}" id="{{name}}" checked>
+        <label class="form-check-label" for="{{name}}">
+            {{name}}
+        </label> 
+    </div>                  
+
+{{/each}}
+<button type="submit" class="btn btn-primary" name="button" value="OK">Add</button>
+
+
+</form> 

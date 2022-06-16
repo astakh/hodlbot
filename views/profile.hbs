@@ -1,0 +1,30 @@
+<h2>Account profile: </h2>
+<p>User: {{user.name}}{{user._id}}</p>
+{{#if pro.noExchange}}
+    <h3>You have no exchanges</h3>  
+{{else}}
+    <h3>You have {{pro.exchangesLength}} exchanges</h3>
+{{/if}}
+<form name="addexchange" action="/profile/addexchange" method="POST">
+<div class="mb-3">
+    <label for="exchselect" class="form-label">Add exchange:</label>
+    <select name="exchselect" class="form-select" aria-label="select exchange">
+        <option selected>Choose exchange </option>
+        {{#each exchanges}}
+        <option value="{{name}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <div class="mb-3">
+        <label for="exchkey" class="form-label">API key:</label>
+        <input type="text" class="form-control" name="exchkey">
+    </div>
+    <div class="mb-3">
+        <label for="exchsecret" class="form-label">API secret</label>
+        <input type="text" class="form-control" name="exchsecret" >
+    </div>
+    
+</div>
+<button type="submit" class="btn btn-primary" name="butaddexchange" value="OK">Add</button>
+
+
+</form>
