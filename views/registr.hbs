@@ -1,0 +1,18 @@
+<form action="/registr" method="POST">
+{{#if usernameError}} <div>user exists</div>{{/if}}
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">username</span>
+  <input type="text" name="username" id="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon2">password</span>
+  <input type="password" name="password" id="password" class="form-control" aria-label="password" aria-describedby="basic-addon1">
+</div>
+{{#if passwordError}} <div>repeat password incorrect</div> {{/if}}
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon3">repeat password</span>
+  <input type="repeatpassword" name="repeatpassword" id="repeatpassword" class="form-control" aria-label="repeatpassword" aria-describedby="basic-addon1">
+</div>
+<button type="submit" name="registrbutton" class="btn btn-primary">Sign up</button>
+</form>
+<a href="/login">or log in</a>

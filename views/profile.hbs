@@ -1,9 +1,12 @@
 <h2>Account profile: </h2>
-<p>User: {{user.name}}{{user._id}}</p>
-{{#if pro.noExchange}}
-    <h3>You have no exchanges</h3>  
+<p>User: {{user.username}} </p>
+{{#if noExchange}}
+    <h3>You have no exchanges connected</h3>  
 {{else}}
-    <h3>You have {{pro.exchangesLength}} exchanges</h3>
+    <h3>You have connected {{exchangesLength}} exchange(s):</h3>
+    {{#each user.exchanges}}
+    <p>{{exchange.name}}</p>
+    {{/each}}
 {{/if}}
 <form name="addexchange" action="/profile/addexchange" method="POST">
 <div class="mb-3">

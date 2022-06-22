@@ -10,17 +10,20 @@ const jwt       = require('jsonwebtoken')
 const { requiresAuth } = require('express-openid-connect'); 
 require('dotenv').config();
 
-router.get('/admin', requiresAuth(), (req, res) => {
-    if (req.oidc.isAuthenticated()) { if (req.oidc.user.name == 'v.astakhov@gmail.com') { admin = true; console.log('admin = true')} } 
-    const params = {
-        title: 'Hodlbot: Admin panel', 
-        isAdmin:                true,
-        isAuthenticated:        req.oidc.isAuthenticated(),
-        isAuthenticatedAdmin:   admin
-    }
-res.render('admin', params) })
+router.get('/admin', (req, res) => { 
+    if (req.user.username == 'admin') {
+        const params = {
+            title: 'Hodlbot: Admin panel', 
+            isAdmin:                true,
+            isAuthenticated:        true,
+            isAuthenticatedAdmin:   true
+        }
+        res.render('admin', params) 
+            
+    } 
+})
 
-router.post('/admin/addexchange', requiresAuth(), async (req, res) => {
+router.post('/admin/addexchange', async (req, res) => {
     if (req.oidc.isAuthenticated()) { if (req.oidc.user.name == 'v.astakhov@gmail.com') { admin = true; console.log('admin = true')} } 
     if (admin) {
         if (req.body.button == 'exch') {
@@ -35,9 +38,8 @@ router.post('/admin/addexchange', requiresAuth(), async (req, res) => {
     }
 res.redirect('/admin')
 })
-router.post('/admin/addstrategy', requiresAuth(), async (req, res) => {
-    if (req.oidc.isAuthenticated()) { if (req.oidc.user.name == 'v.astakhov@gmail.com') { admin = true; console.log('admin = true')} } 
-    if (admin) {
+router.post('/admin/addstrategy', async (req, res) => {
+    if (req.user.username == 'admin') { 
         if (req.body.button == 'str') {
             console.log('add strategy: ',  req.body.strname )
             const str = new Strategy({
@@ -45,8 +47,10 @@ router.post('/admin/addstrategy', requiresAuth(), async (req, res) => {
             })
             await str.save()
         }
-    }
-res.redirect('/admin')})
+        res.redirect('/admin')
+            
+    } 
+})
 
 
 module.exports = router

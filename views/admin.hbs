@@ -16,11 +16,11 @@
 <button type="submit" name="button" class="btn btn-primary" value="exch">add exchange</button>
 </form>
 
-<form name="exch" action="/admin/addstrategy" method="post"> 
+<form id="strategy" action="/admin/addstrategy" method="post"> 
 <h4>Startegys</h4>
 <div class="mb-3">
   <label for="strname" class="form-label">Enter name: </label>
   <input type="text" class="form-control" name="strname">
 </div>
-<button  type="submit" class="btn btn-primary" name="button" value="str">add strategy</button>
+<button form="strategy" type="submit" class="btn btn-primary" name="button" value="str">add strategy</button>
 </form>

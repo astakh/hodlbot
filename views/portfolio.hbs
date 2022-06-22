@@ -1,58 +1,74 @@
- 
-    <table class="table-primary" width="100%">
-        <thead>
-          <tr class="table-primary">
-            <th></th>
-            <th scope="col">Name</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Price</th>
-            <th scope="col">Valuation</th>
-            <th scope="col">Share</th>
-          </tr>
-        </thead>
-
-        <tbody class="table-group-divider">
-        {{#each port.exchanges}}
-        <tr class="table-primary">
-            <td>
-              <form action="/addcase" method="POST">
-              <input type="hidden" name="exchange" value="{{name}}">
-            </td>
-            <td class="table-primary" width="20%"><h3>{{name}}</h3></td>
-            <td class="table-primary" width="20%"></td>
-            <td class="table-primary" width="20%"></td>
-            <td class="table-primary" width="20%" align="right">{{totalValuation}}</td>
-            <td class="table-primary" width="20%" align="right"></td>
-        </tr>
+<div class="accordion" id="accordion">
+  {{#each port.exchanges}}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{name}}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{name}}" aria-expanded="true" aria-controls="collapseOne">
+        <input form="{{name}}form" type="hidden" name="exchange" value="{{name}}">
+        {{name}}
+      </button>
+    </h2>
+    <div id="collapse{{name}}" class="accordion-collapse collapse show" aria-labelledby="heading{{name}}" data-bs-parent="#accordion">
+      <div class="accordion-body">
+        <div class="accordion" id="accordioncase">
           {{#each cases}}
-            <tr class="table-primary">
-                <td>
-                  {{#if isNoCase}} 
-                    <button type="submit" class="btn btn-primary" name="button" value="OK">Add</button> 
-                  {{/if}}
-                </td>
-                <td class="table-primary" width="20%"><h5>{{name}}</h5></td>
-                <td class="table-primary" width="20%"></td>
-                <td class="table-primary" width="20%"></td>
-                <td class="table-primary" width="20%" align="right">{{total}}</td>
-                <td class="table-primary" width="20%" align="right"></td>
-            </tr>
-            {{#each coins }}
-              <tr class="table-primary">
-                  <td> {{#if noCase}}
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="coins[]" value="{{name}}"> 
-                    </div> {{/if}}                 
-                  </td>
-                  <td class="table-primary" width="20%">{{name}}</td>
-                  <td class="table-primary" width="20%" align="right">{{total}}</td>
-                  <td class="table-primary" width="20%" align="right">{{price}}</td>
-                  <td class="table-primary" width="20%" align="right">{{fixed}}</td>
-                  <td class="table-primary" width="20%" align="right">{{share}}</td>
-              </tr>
-            {{/each}}
-          {{#if isNoCase}} </form> {{/if}}
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{exchname}}{{caseId}}">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{exchname}}{{caseId}}" aria-expanded="true" aria-controls="collapseOne">
+                
+                {{name}}
+              </button>
+            </h2>
+            <div id="collapse{{exchname}}{{caseId}}" class="accordion-collapse collapse show" aria-labelledby="heading{{exchname}}{{caseId}}" data-bs-parent="#accordioncase">
+              <div class="accordion-body">
+                {{#if isNoCase}}
+                  <form id="{{exchname}}nocase" action="/createfromportfolio" method="POST">
+                  <input type="hidden" name="exchname" value="{{exchname}}">
+                {{/if}}
+                <table class="table" width="20%">
+                  <thead>
+                    <tr>
+                      <th scope="col">
+                        {{#if isNoCase}}
+                          <button type="submit" class="btn btn-primary" form="{{exchname}}nocase" name="{{exchname}}nocasebutton" value="{{exchname}}nocasebutton">add</button>
+                        {{/if}}
+                      </th>
+                      <th scope="col">Coin</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Valuation</th>
+                      <th scope="col">Plan shares</th>
+                      <th scope="col">Fact shares</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {{#each coins }}
+                        <tr class="table-primary">
+                            <td> {{#if noCase}}
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="coins" value="{{name}}"> 
+                              </div> {{/if}}                 
+                            </td>
+                            <td class="table-primary" >{{name}}</td>
+                            <td class="table-primary" align="right">{{total}}</td>
+                            <td class="table-primary" align="right">{{price}}</td>
+                            <td class="table-primary" align="right">{{fixed}}</td>
+                            <td class="table-primary" align="right">{{planShare}}</td>
+                            <td class="table-primary" align="right">{{factShare}}</td>
+                        </tr>
+                      {{/each}}
+                  </tbody>
+                </table>
+                {{#if isNoCase}}</form>{{/if}}
+              </div>
+            </div>
+          </div>
           {{/each}}
-        {{/each}}
-        </tbody>
-    </table> 
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+
+

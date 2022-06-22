@@ -1,0 +1,13 @@
+{{#if error}} <div>password or username is incorrect</div> {{/if}}
+<form action="/login" method="POST">
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">username</span>
+  <input type="text" name="username" id="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon2">password</span>
+  <input type="password" name="password" id="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+<button type="submit" name="loginbutton" class="btn btn-primary">Log in</button>
+</form>
+<a href="/registr">or sign up</a>

@@ -8,8 +8,3 @@ async function main() {
     console.log(ex)
     await ex.save()
 }
-async function gg() {
-    const dd = new Userpro({userId: 'kkkkkk'})
-    await dd.save()
-}
-gg()

@@ -2,12 +2,11 @@
 
 <form action="/create" method="POST">
 <div class="mb-3">
-  <label for="name" class="form-label">Case name</label>
+  <label for="name" class="form-label"><b>Case name</b></label>
   <input type="text" class="form-control" name="name">
 </div>
 {{#if fromPortfolio}}
-<p>Exchange:</p>
-<b>{{exchange}}</b><br>
+<p><b>Exchange:</b> {{exchange}}</p><br>
 <input type="hidden"  name="exchname" value="{{exchange}}">
 {{else}}
 <div class="mb-3">
@@ -21,17 +20,17 @@
 </div>
 {{/if}}
 <div class="mb-3">
-    <label for="strselect" class="form-label">Strategy:</label>
+    <label for="strselect" class="form-label"><b>Strategy:</b></label>
     <select class="form-select" aria-label="select strategy" name="strname">
         <option selected>Choose strategy</option>
         {{#each strategys}}
-        <option value="{{name}}">{{name}}</option>
+        <option value="{{_id}}">{{name}}</option>
         {{/each}}
     </select>
 </div>
 {{#each coins}}
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="coins[]" value="{{name}}" id="{{name}}" checked>
+        <input class="form-check-input" type="checkbox" name="coins" value="{{name}}" id="{{name}}" checked>
         <label class="form-check-label" for="{{name}}">
             {{name}}
         </label> 
